@@ -1,0 +1,79 @@
+﻿<Window x:Class="Image_Meta_Data_02.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Image_Meta_Data_02"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnLoad" Content="Load Image" 
+                Grid.Column="0" Grid.Row="1"
+                HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                Margin="5" Width="100" 
+                ToolTip="Select image to load" Click="BtnLoad_Click" BorderBrush="{x:Null}" />
+
+        <Image x:Name="imgBox" Margin="5"
+               Grid.Column="1" Grid.Row="0" 
+               RenderTransformOrigin="0.5,0.5"/>
+
+        <DataGrid x:Name="dataGrid" Margin="5"
+                  Grid.Column="0" Grid.Row="0" 
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="Column"
+                  Background="{x:Null}" BorderThickness="0" 
+                  CellStyle="{DynamicResource dgCellStyle}" 
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="LightGray" 
+                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+            <DataGrid.Resources>
+                <Style TargetType="ScrollBar">
+                    <Style.Triggers>
+
+                        <Trigger Property="MinWidth"  Value="5">
+                        </Trigger>
+                       
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="Width" Value="3"/>
+                        </Trigger>
+
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter Property="Height" Value="3"/>
+                        </Trigger>
+
+                        <Trigger Property="Width" Value="30">
+
+                        </Trigger>
+                    </Style.Triggers>
+
+                    <!--<Setter Property="Width" Value="5"/>-->
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="" Width="0.25*" IsReadOnly="True" 
+                                    Binding="{Binding RowNumber}" HeaderStyle="{StaticResource ColumnHeaderStyle}"/>
+                <DataGridTextColumn Header="Property" Width="*" IsReadOnly="True" 
+                                    Binding="{Binding Property}" HeaderStyle="{StaticResource ColumnHeaderStyle}"/>
+                <DataGridTextColumn Header="Value"  Width="*" 
+                                    Binding="{Binding Value}" HeaderStyle="{StaticResource ColumnHeaderStyle}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+    </Grid>
+
+
+</Window>
+ 
