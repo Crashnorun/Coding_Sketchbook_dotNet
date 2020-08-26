@@ -87,17 +87,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-      <!--if $(ConfigurationName)=="Debug" (
-)
--->
-     copy "$(ProjectDir)*.addin" "%25AppData%25\Autodesk\REVIT\Addins\2019"
-     copy "$(ProjectDir)bin\debug\*.dll" "%25AppData%25\Autodesk\REVIT\Addins\2019"
-
-</PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)*.addin" "%25AppData%25\Autodesk\REVIT\Addins\2019"
+copy "$(ProjectDir)bin\debug\*.dll" "%25AppData%25\Autodesk\REVIT\Addins\2019"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>copy "$(SolutionDir)Types\bin\Debug\Types.dll" "$(TargetDir)Types.dll"</PreBuildEvent>
+    <PreBuildEvent>REM copy "$(SolutionDir)Types\bin\Debug\Types.dll" "$(TargetDir)Types.dll"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

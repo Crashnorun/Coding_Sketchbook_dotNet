@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mCurve.cs" />
-    <Compile Include="mFace.cs" />
-    <Compile Include="mLine.cs" />
-    <Compile Include="mPoint.cs" />
-    <Compile Include="mRoom.cs" />
-    <Compile Include="mSpline.cs" />
+    <Compile Include="Geometry\mCurve.cs" />
+    <Compile Include="Geometry\mFace.cs" />
+    <Compile Include="Geometry\mLine.cs" />
+    <Compile Include="Geometry\mPoint.cs" />
+    <Compile Include="Geometry\mRoom.cs" />
+    <Compile Include="Geometry\mSpline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
