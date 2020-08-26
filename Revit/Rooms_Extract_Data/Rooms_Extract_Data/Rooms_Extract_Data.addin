@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command Rooms_Extract_Data</Text>
+    <Description>Some description for Rooms_Extract_Data</Description>
+    <Assembly>Rooms_Extract_Data.dll</Assembly>
+    <FullClassName>Rooms_Extract_Data.Command</FullClassName>
+    <ClientId>89784937-93c2-4d88-b3c8-d73047a412b2</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application Rooms_Extract_Data</Name>
+    <Assembly>Rooms_Extract_Data.dll</Assembly>
+    <FullClassName>Rooms_Extract_Data.App</FullClassName>
+    <ClientId>5153ed22-0aa4-4f8d-8f3c-e2f0e95254ac</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
