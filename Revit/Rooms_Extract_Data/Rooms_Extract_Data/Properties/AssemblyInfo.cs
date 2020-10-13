@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Autodesk Inc.")]
 [assembly: AssemblyProduct("Rooms_Extract_Data Revit C# .NET Add-In")]
-[assembly: AssemblyCopyright("Copyright 2016 (C) Jeremy Tammik, Autodesk Inc.")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,3 +34,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2019.0.0.0")]
 [assembly: AssemblyFileVersion("2019.0.0.0")]
+[assembly: AssemblyKeyFile(@"C:\Users\cportelli\Documents\Personal\GitHub\Coding_Sketchbook_dotNet\Revit\Rooms_Extract_Data\Rooms_Extract_Data\bin\Debug\Keys.snk")]

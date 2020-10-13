@@ -9,11 +9,13 @@ namespace Reflection
 {
     class Program
     {
+        public static string Name = "Charlie";
+
         static void Main(string[] args)
         {
             Console.WriteLine(Add(1, 2));
 
-
+            Console.WriteLine(Name);
             Console.ReadKey();
         }
 
