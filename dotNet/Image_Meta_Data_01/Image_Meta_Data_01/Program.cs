@@ -21,15 +21,66 @@ namespace Image_Meta_Data_01
     {
         static void Main(string[] args)
         {
-            GetImageFileFromResources();
+            // GetImageFileFromResources();
 
             Console.WriteLine("-------------");
 
-            GetImageFile();
+            // GetImageFile();
+
+            GetGIFFrames(@"C:\Users\cportelli\Documents\Professional\Konstru Images\image10.gif");
 
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Get the frames from an animated GIF
+        /// </summary>
+        /// <param name="FilePath">Full file path of the GIF</param>
+        public static void GetGIFFrames(string FilePath)
+        {
+            // exit if file doesn't exist
+            if (!System.IO.File.Exists(FilePath))
+            {
+                Console.WriteLine("File does not exist: " + FilePath);
+                return;
+            }
+
+            string Path = System.IO.Path.GetDirectoryName(FilePath);                            // get file path
+            string FileName = System.IO.Path.GetFileName(FilePath);                             // get file name
+            string FileExtension = System.IO.Path.GetExtension(FilePath);                       // get file extension
+
+            if (FileName.Contains(FileExtension))
+                FileName = FileName.TrimEnd(FileExtension.ToArray());                           // remove the extension
+
+            string NewFolderPath = Path + @"\" + FileName;
+
+            System.IO.DirectoryInfo newDirectory = System.IO.Directory.CreateDirectory(NewFolderPath);
+            if (!System.IO.Directory.Exists(NewFolderPath))
+            {
+                Console.WriteLine("Cannot create new folder path");
+                return;
+            }
+
+            Image img = Image.FromFile(FilePath);                                               // load image
+            int frames = img.GetFrameCount(FrameDimension.Time);                                // get number of frames
+            byte[] times = img.GetPropertyItem(0x5100).Value;
+            string suffix;
+
+            for (int i = 0; i < frames; i++)
+            {
+                suffix = i.ToString();
+                int dur = BitConverter.ToInt32(times, 4 * i);                                   // get frame duration
+                img.SelectActiveFrame(FrameDimension.Time, i);                                  // set active frame
+                Image frame = new Bitmap(img);                                                  // get frame
+
+                if (i < 10)                                                                     // set frame counter
+                    suffix = "00" + i.ToString();
+                else if (i < 100)
+                    suffix = "0" + i.ToString();
+
+                frame.Save(NewFolderPath + @"\Frame_" + suffix + ".jpg");                                // save frame
+            }
+        }
 
         public static void GetImageFileFromResources()
         {
