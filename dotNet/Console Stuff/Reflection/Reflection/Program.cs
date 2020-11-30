@@ -16,6 +16,23 @@ namespace Reflection
             Console.WriteLine(Add(1, 2));
 
             Console.WriteLine(Name);
+
+            Person p = new Person("Charlie", 40);
+
+            PropertyInfo[] pInfo = p.GetType().GetProperties();
+            foreach (PropertyInfo info in pInfo)
+            {
+                var val = info.GetValue(p).ToString();
+
+                // Type pType = info.GetType();
+                // string val = pType.GetProperty(info.Name).GetValue(p).ToString();
+
+                Console.WriteLine("\t" + info.Name + " : " + val);
+            }
+
+
+
+
             Console.ReadKey();
         }
 
@@ -25,6 +42,18 @@ namespace Reflection
             Console.WriteLine(string.Format("\tnum1 : {0} | num2: {1}", num1, num2));
 
             return num1 + num2;
+        }
+    }
+
+    public class Person
+    {
+        public string PersonName { get; set; }
+        public int PersonAge { get; set; }
+
+        public Person(string Name, int Age)
+        {
+            this.PersonAge = Age;
+            this.PersonName = Name;
         }
     }
 }
