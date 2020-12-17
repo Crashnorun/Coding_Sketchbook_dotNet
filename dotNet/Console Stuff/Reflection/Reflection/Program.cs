@@ -18,17 +18,12 @@ namespace Reflection
             Console.WriteLine(Name);
 
             Person p = new Person("Charlie", 40);
+            Person p2 = new Person("Bob", 12);
 
-            PropertyInfo[] pInfo = p.GetType().GetProperties();
-            foreach (PropertyInfo info in pInfo)
-            {
-                var val = info.GetValue(p).ToString();
+            GetAllPropertyNamesAndValues(p);
 
-                // Type pType = info.GetType();
-                // string val = pType.GetProperty(info.Name).GetValue(p).ToString();
-
-                Console.WriteLine("\t" + info.Name + " : " + val);
-            }
+            Person p3 = new Person(p);
+          
 
 
 
@@ -43,17 +38,46 @@ namespace Reflection
 
             return num1 + num2;
         }
+
+
+        public static void GetAllPropertyNamesAndValues(object T)
+        {
+            Console.WriteLine(T.GetType().Name);
+
+            PropertyInfo[] propInfo = T.GetType().GetProperties();
+            foreach (PropertyInfo info in propInfo)
+                Console.WriteLine("\t"+info.Name + " : " + info.GetValue(T));
+
+        }
     }
 
     public class Person
     {
+
+
         public string PersonName { get; set; }
         public int PersonAge { get; set; }
+
 
         public Person(string Name, int Age)
         {
             this.PersonAge = Age;
             this.PersonName = Name;
+        }
+
+
+        /// <summary>
+        /// Create object from object
+        /// </summary>
+        /// <param name="person"></param>
+        public Person(Person person)
+        {
+            PropertyInfo[] pinfo = this.GetType().GetProperties();
+
+            foreach(PropertyInfo p in pinfo)
+            {
+                p.SetValue(this, person.GetType().GetProperty(p.Name).GetValue(person));
+            }
         }
     }
 }
