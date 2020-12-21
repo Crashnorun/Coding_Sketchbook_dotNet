@@ -17,18 +17,24 @@ namespace Console_Beep
         static void Main(string[] args)
         {
 
-              Console.WriteLine("Testing PC Speaker...");
-              for(int i = 32700; i >200; i-=10)
-              {
-                  Console.WriteLine(i.ToString());
+            // continiousBeep();
 
-                  //Beep(i, 5);
-                  Console.Beep(32767, 10000);
-                  //System.Threading.Thread.Sleep(1000);
-                  Console.SetCursorPosition(0, Console.CursorTop - 1);
-                  ClearCurrentConsoleLine();
-              }
-              Console.WriteLine("Testing Complete");
+
+            Console.WriteLine("Testing PC Speaker...");
+            //for (int i = 32700; i > 200; i -= 10)
+            for (int i = 15000; i < 32000; i += 10)
+            {
+                Console.WriteLine(i.ToString());
+
+                //Console.Beep(20000, 5000);
+                //Beep(i, 10000);
+                //Console.Beep(32767, 10000);
+                Console.Beep(i, 2000);
+                //System.Threading.Thread.Sleep(1000);
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                ClearCurrentConsoleLine();
+            }
+            Console.WriteLine("Testing Complete");
 
 
             /*    Note[] Mary =
@@ -126,7 +132,13 @@ namespace Console_Beep
             public Duration NoteDuration { get { return durVal; } }
         }
 
-
+        public static void continiousBeep()
+        {
+            while (true)
+            {
+                Console.Beep(25000, 10000);
+            }
+        }
 
 
     }
