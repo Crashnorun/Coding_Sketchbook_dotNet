@@ -7,6 +7,17 @@ using System.Threading.Tasks;
 
 namespace Reflection
 {
+
+    /*TODO: 1.  Test when using reflection to iterate through the properties of a class, are the properties listed 
+     * alphabetically or are they listed in the order they are written in the class?
+     * 
+     *TODO: 2. Instantiate a class / object from a string using the Create instance method
+     * https://stackoverflow.com/questions/752/how-to-create-a-new-object-instance-from-a-type
+     *  
+     */
+
+
+
     class Program
     {
         public static string Name = "Charlie";
