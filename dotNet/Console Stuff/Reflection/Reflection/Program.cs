@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace Reflection
 {
 
-    /*TODO: 1.  Test when using reflection to iterate through the properties of a class, are the properties listed 
-     * alphabetically or are they listed in the order they are written in the class?
+    /*NOTES: The properties are listed in the order they are written in the class
      * 
      *TODO: 2. Instantiate a class / object from a string using the Create instance method
      * https://stackoverflow.com/questions/752/how-to-create-a-new-object-instance-from-a-type
@@ -33,11 +32,9 @@ namespace Reflection
 
             GetAllPropertyNamesAndValues(p);
 
+            IterateOverPropertiesUsingIndex(p);
+
             Person p3 = new Person(p);
-
-
-
-
 
             Console.ReadKey();
         }
@@ -67,8 +64,24 @@ namespace Reflection
                 else   // this also catches arrays
                     Console.WriteLine(string.Format("\t{0} ({1}) : {2}", info.Name, info.PropertyType.Name, info.GetValue(T)));
             }
+
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine();
+        }
+
+
+        public static void IterateOverPropertiesUsingIndex(object T)
+        {
+            Console.WriteLine(T.GetType().Name);
+            PropertyInfo[] propInfo = T.GetType().GetProperties();
+            for (int i = 0; i < propInfo.Length; i++)
+                Console.WriteLine(string.Format("\tIndex: {0} | Property: {1}", i, propInfo[i].Name));
+
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine();
         }
     }
+
 
     //---------------------------------------------------------------------------------
 
