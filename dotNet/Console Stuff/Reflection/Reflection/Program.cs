@@ -36,6 +36,15 @@ namespace Reflection
 
             Person p3 = new Person(p);
 
+
+            Dictionary<string, int> vals = new Dictionary<string, int>();
+
+            vals.Add("a", 1);
+            vals.Add("z", 2);
+            vals.Add("h", 2);
+
+            Console.WriteLine(vals.Keys);
+
             Console.ReadKey();
         }
 
