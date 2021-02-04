@@ -1,0 +1,6 @@
+C:\Users\cportelli\Documents\Personal\GitHub\ProgressDemo-master\ProgressDemo\bin\Debug\ProgressDemo.exe
+C:\Users\cportelli\Documents\Personal\GitHub\ProgressDemo-master\ProgressDemo\bin\Debug\ProgressDemo.pdb
+C:\Users\cportelli\Documents\Personal\GitHub\ProgressDemo-master\ProgressDemo\obj\Debug\ProgressDemo.csprojAssemblyReference.cache
+C:\Users\cportelli\Documents\Personal\GitHub\ProgressDemo-master\ProgressDemo\obj\Debug\ProgressDemo.csproj.CoreCompileInputs.cache
+C:\Users\cportelli\Documents\Personal\GitHub\ProgressDemo-master\ProgressDemo\obj\Debug\ProgressDemo.exe
+C:\Users\cportelli\Documents\Personal\GitHub\ProgressDemo-master\ProgressDemo\obj\Debug\ProgressDemo.pdb
