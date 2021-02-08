@@ -16,6 +16,7 @@ namespace RegestryTesting
         {
             // read value from CURRENT USER registry
             //Console.WriteLine(ReadCurrentUser());
+           
             // read value from LOCAL MACHINE
 
             // Write new value to User registry 
