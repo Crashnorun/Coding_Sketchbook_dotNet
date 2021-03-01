@@ -7,6 +7,16 @@ using System.Threading.Tasks;
 
 namespace Reflection
 {
+
+    /*NOTES: The properties are listed in the order they are written in the class
+     * 
+     *TODO: 2. Instantiate a class / object from a string using the Create instance method
+     * https://stackoverflow.com/questions/752/how-to-create-a-new-object-instance-from-a-type
+     *  
+     */
+
+
+
     class Program
     {
         public static string Name = "Charlie";
@@ -22,9 +32,12 @@ namespace Reflection
 
             GetAllPropertyNamesAndValues(p);
 
+            IterateOverPropertiesUsingIndex(p);
+
             Person p3 = new Person(p);
 
 
+<<<<<<< HEAD
             // Test invoking a method that has no input parameters using reflection
             int length = (int)p3.GetType().GetMethod("NameLength").Invoke(p3, null);
             Console.WriteLine(length);
@@ -32,15 +45,26 @@ namespace Reflection
             // test invoking a method that has input parameters using reflection
             int newAge = (int)p3.GetType().GetMethod("AddAge").Invoke(p3, new object[] { 10 });
             Console.WriteLine(newAge);
+=======
+            Dictionary<string, int> vals = new Dictionary<string, int>();
+
+            vals.Add("a", 1);
+            vals.Add("z", 2);
+            vals.Add("h", 2);
+
+            Console.WriteLine(vals.Keys);
+>>>>>>> 7fb008cb0f6a86cbd178f66af5a226da2ef0d7ed
 
             Console.ReadKey();
         }
+
 
         public static double Add(double num1, double num2)
         {
             Console.WriteLine("Entered: " + MethodBase.GetCurrentMethod().Name);
             Console.WriteLine(string.Format("\tnum1 : {0} | num2: {1}", num1, num2));
 
+            Console.WriteLine("\tExiting: " + MethodBase.GetCurrentMethod().Name + " : " + num1 + num2);
             return num1 + num2;
         }
 
@@ -51,6 +75,7 @@ namespace Reflection
 
             PropertyInfo[] propInfo = T.GetType().GetProperties();
             foreach (PropertyInfo info in propInfo)
+<<<<<<< HEAD
                 Console.WriteLine("\t" + info.Name + " : " + info.GetValue(T));
 
             Console.WriteLine("");
@@ -58,18 +83,58 @@ namespace Reflection
             FieldInfo[] fieldInfo = T.GetType().GetFields();
             foreach (FieldInfo info in fieldInfo)
                 Console.WriteLine("\t" + info.Name + " : " + info.GetValue(null));
+=======
+            {
+                // if(info.GetType().IsGenericType && info.GetType().GetGenericTypeDefinition() == typeof(List<>))
+                // if (info.PropertyType == typeof(List<>))
+                if (info.PropertyType.Name.Contains("List"))
+                    Console.WriteLine(string.Format("\t{0} ({1}<{2}>) : {3}", info.Name, info.PropertyType.Name, info.PropertyType.GetGenericArguments()[0].Name, info.GetValue(T)));
+                else   // this also catches arrays
+                    Console.WriteLine(string.Format("\t{0} ({1}) : {2}", info.Name, info.PropertyType.Name, info.GetValue(T)));
+            }
+
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine();
+        }
+
+
+        public static void IterateOverPropertiesUsingIndex(object T)
+        {
+            Console.WriteLine(T.GetType().Name);
+            PropertyInfo[] propInfo = T.GetType().GetProperties();
+            for (int i = 0; i < propInfo.Length; i++)
+                Console.WriteLine(string.Format("\tIndex: {0} | Property: {1}", i, propInfo[i].Name));
+
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine();
+>>>>>>> 7fb008cb0f6a86cbd178f66af5a226da2ef0d7ed
         }
     }
+
+
+    //---------------------------------------------------------------------------------
 
     public class Person
     {
 
+<<<<<<< HEAD
         #region ----PROPERTIES----
 
         private const string PrivateConstantString = "PRIVATE CONSTANT STRING";
         public const string PublicConstantString = "PUBLIC CONSTANT STRING";
         public string PersonName { get; set; }
         public int PersonAge { get; set; }
+=======
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Age { get; set; }
+        public List<string> Children { get; set; }
+        public decimal[] Nums { get; set; }
+
+        #region ----CONSTRUCTORS----
+
+        public Person() { }
+>>>>>>> 7fb008cb0f6a86cbd178f66af5a226da2ef0d7ed
 
         #endregion
 
@@ -78,8 +143,8 @@ namespace Reflection
 
         public Person(string Name, int Age)
         {
-            this.PersonAge = Age;
-            this.PersonName = Name;
+            this.Age = Age;
+            this.FirstName = Name;
         }
 
 
@@ -100,6 +165,7 @@ namespace Reflection
         #endregion
 
 
+<<<<<<< HEAD
         #region ----METHODS----
 
 
@@ -116,5 +182,10 @@ namespace Reflection
         }
 
         #endregion
+=======
+
+
+
+>>>>>>> 7fb008cb0f6a86cbd178f66af5a226da2ef0d7ed
     }
 }
