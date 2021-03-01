@@ -23,10 +23,15 @@ namespace Reflection
             GetAllPropertyNamesAndValues(p);
 
             Person p3 = new Person(p);
-          
 
 
+            // Test invoking a method that has no input parameters using reflection
+            int length = (int)p3.GetType().GetMethod("NameLength").Invoke(p3, null);
+            Console.WriteLine(length);
 
+            // test invoking a method that has input parameters using reflection
+            int newAge = (int)p3.GetType().GetMethod("AddAge").Invoke(p3, new object[] { 10 });
+            Console.WriteLine(newAge);
 
             Console.ReadKey();
         }
@@ -46,18 +51,30 @@ namespace Reflection
 
             PropertyInfo[] propInfo = T.GetType().GetProperties();
             foreach (PropertyInfo info in propInfo)
-                Console.WriteLine("\t"+info.Name + " : " + info.GetValue(T));
+                Console.WriteLine("\t" + info.Name + " : " + info.GetValue(T));
 
+            Console.WriteLine("");
+
+            FieldInfo[] fieldInfo = T.GetType().GetFields();
+            foreach (FieldInfo info in fieldInfo)
+                Console.WriteLine("\t" + info.Name + " : " + info.GetValue(null));
         }
     }
 
     public class Person
     {
 
+        #region ----PROPERTIES----
 
+        private const string PrivateConstantString = "PRIVATE CONSTANT STRING";
+        public const string PublicConstantString = "PUBLIC CONSTANT STRING";
         public string PersonName { get; set; }
         public int PersonAge { get; set; }
 
+        #endregion
+
+
+        #region ----CONSTRUCTORS----
 
         public Person(string Name, int Age)
         {
@@ -74,10 +91,30 @@ namespace Reflection
         {
             PropertyInfo[] pinfo = this.GetType().GetProperties();
 
-            foreach(PropertyInfo p in pinfo)
+            foreach (PropertyInfo p in pinfo)
             {
                 p.SetValue(this, person.GetType().GetProperty(p.Name).GetValue(person));
             }
         }
+
+        #endregion
+
+
+        #region ----METHODS----
+
+
+        public int NameLength()
+        {
+            return PersonName.Length;
+        }
+
+
+
+        public int AddAge(int AddYears)
+        {
+            return PersonAge + AddYears;
+        }
+
+        #endregion
     }
 }
