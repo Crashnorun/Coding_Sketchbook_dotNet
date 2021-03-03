@@ -23,6 +23,7 @@ namespace Reflection
 
         static void Main(string[] args)
         {
+            // add two numbers
             Console.WriteLine(Add(1, 2));
 
             Console.WriteLine(Name);
@@ -30,12 +31,13 @@ namespace Reflection
             Person p = new Person("Charlie", 40);
             Person p2 = new Person("Bob", 12);
 
+            // get all properties and values
             GetAllPropertyNamesAndValues(p);
 
+            // iterate over all properties using an index
             IterateOverPropertiesUsingIndex(p);
 
             Person p3 = new Person(p);
-
 
             // Test invoking a method that has no input parameters using reflection
             int length = (int)p3.GetType().GetMethod("NameLength").Invoke(p3, null);
@@ -81,23 +83,30 @@ namespace Reflection
         {
             Console.WriteLine(T.GetType().Name);
 
-            PropertyInfo[] propInfo = T.GetType().GetProperties();
+            PropertyInfo[] propInfo = T.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             foreach (PropertyInfo info in propInfo)
             {
                 // if(info.GetType().IsGenericType && info.GetType().GetGenericTypeDefinition() == typeof(List<>))
                 // if (info.PropertyType == typeof(List<>))
+
+                string publicPrivate = info.GetAccessors(true)[0].IsPublic ? "Public" : "Private";
+
                 if (info.PropertyType.Name.Contains("List"))
-                    Console.WriteLine(string.Format("\t{0} ({1}<{2}>) : {3}", info.Name, info.PropertyType.Name, info.PropertyType.GetGenericArguments()[0].Name, info.GetValue(T)));
+                    Console.WriteLine(string.Format("\t{0} ({1} {2}<{3}>) : {4}", info.Name, publicPrivate, info.PropertyType.Name, info.PropertyType.GetGenericArguments()[0].Name, info.GetValue(T)));
                 else   // this also catches arrays
-                    Console.WriteLine(string.Format("\t{0} ({1}) : {2}", info.Name, info.PropertyType.Name, info.GetValue(T)));
+                {
+                    Console.WriteLine(string.Format("\t{0} ({1} {2}) : {3}", info.Name, publicPrivate, info.PropertyType.Name, info.GetValue(T)));
+                }
+
             }
 
             Console.WriteLine("");
 
-            FieldInfo[] fieldInfo = T.GetType().GetFields();
+            FieldInfo[] fieldInfo = T.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
             foreach (FieldInfo info in fieldInfo)
             {
-                Console.WriteLine("\t" + info.FieldType.Name);
+                string publicPrivate = info.IsPublic ? "Public" : "Private";
+                Console.WriteLine(string.Format("\t{0} ({1} {2}) : {3}", info.Name, publicPrivate, info.FieldType.Name, info.GetValue(T)));
             }
 
             Console.WriteLine("---------------------------------");
@@ -170,12 +179,13 @@ namespace Reflection
 
         #endregion
 
-        
+
         #region ----METHODS----
 
 
         public int NameLength()
         {
+            if (string.IsNullOrEmpty(PersonName)) PersonName = FirstName;
             return PersonName.Length;
         }
 
