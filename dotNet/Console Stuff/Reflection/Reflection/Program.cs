@@ -16,7 +16,6 @@ namespace Reflection
      */
 
 
-
     class Program
     {
         public static string Name = "Charlie";
@@ -26,18 +25,18 @@ namespace Reflection
             // add two numbers
             Console.WriteLine(Add(1, 2));
 
-            Console.WriteLine(Name);
-
             Person p = new Person("Charlie", 40);
             Person p2 = new Person("Bob", 12);
+            Person p3 = new Person(p);
+
 
             // get all properties and values
             GetAllPropertyNamesAndValues(p);
 
+
             // iterate over all properties using an index
             IterateOverPropertiesUsingIndex(p);
 
-            Person p3 = new Person(p);
 
             // Test invoking a method that has no input parameters using reflection
             int length = (int)p3.GetType().GetMethod("NameLength").Invoke(p3, null);
@@ -54,6 +53,15 @@ namespace Reflection
             vals.Add("h", 2);
 
             Console.WriteLine(vals.Keys);
+
+            Node n = new Node() { NodeIndex = 10, NodeName = "C", X = 1, Y = 2, Z = 3, AnotherName = "v" };
+            SubNode sn = new SubNode() { NodeIndex = 10, X = 1, Y = 2, Z = 3 };
+
+            SubNode sn2 = n;
+
+            GetAllPropertyNamesAndValues(n);
+            GetAllPropertyNamesAndValues(sn);
+
 
             Console.ReadKey();
         }
@@ -83,11 +91,25 @@ namespace Reflection
         {
             Console.WriteLine(T.GetType().Name);
 
-            PropertyInfo[] propInfo = T.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            // get all the properties
+            //PropertyInfo[] propInfo = T.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly| BindingFlags.FlattenHierarchy);
+            PropertyInfo[] propInfo = T.GetType().GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance);
+
             foreach (PropertyInfo info in propInfo)
             {
                 // if(info.GetType().IsGenericType && info.GetType().GetGenericTypeDefinition() == typeof(List<>))
                 // if (info.PropertyType == typeof(List<>))
+               
+
+                foreach (CustomAttributeData att in info.CustomAttributes)
+                {
+                   Console.WriteLine(string.Format("{0}" , att.AttributeType.Name));
+                    
+                    foreach(CustomAttributeNamedArgument arg in att.NamedArguments)
+                    {
+                        Console.WriteLine(arg.MemberName + " " + arg.MemberInfo + " " + arg.TypedValue);
+                    }
+                }
 
                 string publicPrivate = info.GetAccessors(true)[0].IsPublic ? "Public" : "Private";
 
@@ -102,12 +124,17 @@ namespace Reflection
 
             Console.WriteLine("");
 
-            FieldInfo[] fieldInfo = T.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+            FieldInfo[] fieldInfo = T.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
             foreach (FieldInfo info in fieldInfo)
             {
                 string publicPrivate = info.IsPublic ? "Public" : "Private";
                 Console.WriteLine(string.Format("\t{0} ({1} {2}) : {3}", info.Name, publicPrivate, info.FieldType.Name, info.GetValue(T)));
             }
+
+
+
+            BooleanTests();
+
 
             Console.WriteLine("---------------------------------");
             Console.WriteLine();
@@ -124,78 +151,17 @@ namespace Reflection
             Console.WriteLine("---------------------------------");
             Console.WriteLine();
         }
-    }
 
 
-    //---------------------------------------------------------------------------------
-
-    public class Person
-    {
-
-        #region ----PROPERTIES----
-
-        private const string PrivateConstantString = "PRIVATE CONSTANT STRING";
-        public const string PublicConstantString = "PUBLIC CONSTANT STRING";
-        public string PersonName { get; set; }
-        public int PersonAge { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
-        public List<string> Children { get; set; }
-        public decimal[] Nums { get; set; }
-
-        #endregion
-
-
-        #region ----CONSTRUCTORS----
-
-        public Person() { }
-
-        #endregion
-
-
-        #region ----CONSTRUCTORS----
-
-        public Person(string Name, int Age)
+        public static void BooleanTests()
         {
-            this.Age = Age;
-            this.FirstName = Name;
-        }
-
-
-        /// <summary>
-        /// Create object from object
-        /// </summary>
-        /// <param name="person"></param>
-        public Person(Person person)
-        {
-            PropertyInfo[] pinfo = this.GetType().GetProperties();
-
-            foreach (PropertyInfo p in pinfo)
-            {
-                p.SetValue(this, person.GetType().GetProperty(p.Name).GetValue(person));
-            }
-        }
-
-        #endregion
-
-
-        #region ----METHODS----
-
-
-        public int NameLength()
-        {
-            if (string.IsNullOrEmpty(PersonName)) PersonName = FirstName;
-            return PersonName.Length;
+            Console.WriteLine(string.Format("1 = {0}", Convert.ToBoolean(1)));
+            Console.WriteLine(string.Format("0 = {0}", Convert.ToBoolean(0)));
         }
 
 
 
-        public int AddAge(int AddYears)
-        {
-            return PersonAge + AddYears;
-        }
 
-        #endregion
+
     }
 }
