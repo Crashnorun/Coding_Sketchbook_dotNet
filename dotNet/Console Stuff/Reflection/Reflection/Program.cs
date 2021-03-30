@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -62,6 +63,7 @@ namespace Reflection
             GetAllPropertyNamesAndValues(n);
             GetAllPropertyNamesAndValues(sn);
 
+            FindMemoryUsage();
 
             Console.ReadKey();
         }
@@ -99,13 +101,13 @@ namespace Reflection
             {
                 // if(info.GetType().IsGenericType && info.GetType().GetGenericTypeDefinition() == typeof(List<>))
                 // if (info.PropertyType == typeof(List<>))
-               
+
 
                 foreach (CustomAttributeData att in info.CustomAttributes)
                 {
-                   Console.WriteLine(string.Format("{0}" , att.AttributeType.Name));
-                    
-                    foreach(CustomAttributeNamedArgument arg in att.NamedArguments)
+                    Console.WriteLine(string.Format("{0}", att.AttributeType.Name));
+
+                    foreach (CustomAttributeNamedArgument arg in att.NamedArguments)
                     {
                         Console.WriteLine(arg.MemberName + " " + arg.MemberInfo + " " + arg.TypedValue);
                     }
@@ -159,8 +161,16 @@ namespace Reflection
             Console.WriteLine(string.Format("0 = {0}", Convert.ToBoolean(0)));
         }
 
-
-
+        /// <summary>
+        /// Get the memory usage of the current process
+        /// <Reference>https://stackoverflow.com/questions/2342023/how-to-measure-the-total-memory-consumption-of-the-current-process-programmatica</Reference>
+        /// </summary>
+        public static void FindMemoryUsage()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            long totalBytesOfMemoryUsed = currentProcess.WorkingSet64;
+            Console.WriteLine(totalBytesOfMemoryUsed);
+        }
 
 
     }
