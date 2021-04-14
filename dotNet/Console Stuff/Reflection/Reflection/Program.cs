@@ -23,6 +23,7 @@ namespace Reflection
 
         static void Main(string[] args)
         {
+            // testing logging entering and exiting a function
             // add two numbers
             Console.WriteLine(Add(1, 2));
 
@@ -30,14 +31,11 @@ namespace Reflection
             Person p2 = new Person("Bob", 12);
             Person p3 = new Person(p);
 
-
             // get all properties and values
             GetAllPropertyNamesAndValues(p);
 
-
             // iterate over all properties using an index
             IterateOverPropertiesUsingIndex(p);
-
 
             // Test invoking a method that has no input parameters using reflection
             int length = (int)p3.GetType().GetMethod("NameLength").Invoke(p3, null);
@@ -48,22 +46,21 @@ namespace Reflection
             Console.WriteLine(newAge);
 
             Dictionary<string, int> vals = new Dictionary<string, int>();
-
             vals.Add("a", 1);
             vals.Add("z", 2);
             vals.Add("h", 2);
-
             Console.WriteLine(vals.Keys);
 
+            // testing inheritance 
             Node n = new Node() { NodeIndex = 10, NodeName = "C", X = 1, Y = 2, Z = 3, AnotherName = "v" };
             SubNode sn = new SubNode() { NodeIndex = 10, X = 1, Y = 2, Z = 3 };
-
             SubNode sn2 = n;
 
             GetAllPropertyNamesAndValues(n);
             GetAllPropertyNamesAndValues(sn);
 
             FindMemoryUsage();
+
 
             Console.ReadKey();
         }
@@ -164,6 +161,7 @@ namespace Reflection
         /// <summary>
         /// Get the memory usage of the current process
         /// <Reference>https://stackoverflow.com/questions/2342023/how-to-measure-the-total-memory-consumption-of-the-current-process-programmatica</Reference>
+        /// <Reference> https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process.workingset64?view=net-5.0</Reference>
         /// </summary>
         public static void FindMemoryUsage()
         {

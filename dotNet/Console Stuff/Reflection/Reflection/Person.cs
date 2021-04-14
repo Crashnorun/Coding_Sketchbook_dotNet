@@ -3,20 +3,45 @@ using System.Reflection;
 
 namespace Reflection
 {
-
+    /// <summary>
+    /// Person class
+    /// </summary>
     public class Person
     {
 
         #region ----PROPERTIES----
 
+        /// <summary>
+        /// Private constant string
+        /// </summary>
         private const string PrivateConstantString = "PRIVATE CONSTANT STRING";
+
+        /// <summary>
+        /// public constant string
+        /// </summary>
         public const string PublicConstantString = "PUBLIC CONSTANT STRING";
+
+        /// <summary>
+        /// Person name
+        /// </summary>
         public string PersonName { get; set; }
+
+        /// <summary>
+        /// Person age
+        /// </summary>
         public int PersonAge { get; set; }
+
+        /// <summary>
+        /// First name
+        /// </summary>
         public string FirstName { get; set; }
+
+        /// <summary>
+        /// Last Name
+        /// </summary>
         public string LastName { get; set; }
 
-        [OptionalProperty(Name ="CP")]
+        [OptionalProperty(Name = "CP")]
         public int Age { get; set; }
         public List<string> ChildrenNames { get; set; }
         public decimal[] Nums { get; set; }
