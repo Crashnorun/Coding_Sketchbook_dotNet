@@ -1,0 +1,39 @@
+﻿TO DO List
+
+ZOOM Add ability to Zoom:
+	In
+	Out
+	Extent
+	Fit width
+	Fit height
+
+BASIC INFO
+	File name
+	Folder path
+	File size
+	File Type
+	Date Created
+	Date Modified
+	Date accessed
+
+RAW Files
+	Ability to read Cannon raw files: .CR2 files - https://stackoverflow.com/questions/4111939/loading-canon-cr2-files-in-net
+
+EXPORT data as CSV
+
+RENAME - rename the file. Ask to delete or keep original file.
+
+ROTATE IMAGE - rotate 90 degrees CW or CCW
+
+EDITIBLE PROPERTIES - change UI color of properties that can be edited. Which properties can be edited, which cannot?
+	Save changed data
+
+ANIMATED GIF
+	Manually scrub through animated gif frames
+	Play animated gif
+	Extract frame(s) from animated gif
+
+ABOUT
+	Create ABOUT section
+	Create HELP section to point to github?
+	CHeck version
