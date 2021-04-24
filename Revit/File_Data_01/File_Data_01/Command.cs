@@ -31,17 +31,19 @@ namespace File_Data_01
             }
             Document doc = uidoc.Document;
 
+            FamilySymbolData(doc);
+            FamilyInstanceData(doc);
+            DetailLineData(doc);
+            ViewData(doc);
+            // get levels
+            // get grids
+
             string filename = Path.GetFileName(doc.PathName);
             string folder = Path.GetDirectoryName(doc.PathName);
             log.Add("File name: " + filename);
             Debug.Print("FileName: " + filename);
 
-            FamilySymbolData(doc);
-            FamilyInstanceData(doc);
-            DetailLineData(doc);
-            ViewData(doc);
-
-            if (log.Count > 0 && doc != null) File.WriteAllLines(folder + @"\Element Data Log.csv", log);
+            if (log.Count > 0 && doc != null) File.WriteAllLines(folder + @"\"+ LogFileName(filename), log);
 
             MessageBox.Show("Data Export Complete","Data Export",MessageBoxButtons.OK);
             Debug.Print("---- DONE ----");
@@ -57,7 +59,7 @@ namespace File_Data_01
 
 
         /// <summary>
-        ///  find all family symbol data
+        ///  find all family symbol data in the active revit document
         /// </summary>
         /// <param name="doc">Active revit document</param>
         public void FamilySymbolData(Document doc)
@@ -228,6 +230,18 @@ namespace File_Data_01
             }
             //log.Add(Environment.NewLine);
             Debug.Print("---- VIEW DATA ----");
+        }
+    
+
+        /// <summary>
+        /// Format the log file name
+        /// </summary>
+        /// <param name="FileName">Revit file name</param>
+        /// <returns>Formatted log file name</returns>
+        public string LogFileName(string FileName)
+        {
+            string date = DateTime.Now.ToString("yyMMdd");
+            return string.Format("{0}_{1}_Element Data Log.csv", date, FileName);
         }
     }
 }
