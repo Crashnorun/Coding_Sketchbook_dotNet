@@ -6,15 +6,15 @@
     <Assembly>File_Data_01.dll</Assembly>
     <FullClassName>File_Data_01.Command</FullClassName>
     <ClientId>d81b97d1-1252-45b2-8121-bc6798bb0c71</ClientId>
-    <VendorId>com.typepad.thebuildingcoder</VendorId>
-    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+    <VendorId>-*-</VendorId>
+    <VendorDescription>-*-</VendorDescription>
   </AddIn>
   <AddIn Type="Application">
     <Name>Application File_Data_01</Name>
     <Assembly>File_Data_01.dll</Assembly>
     <FullClassName>File_Data_01.App</FullClassName>
     <ClientId>cbcf120f-70da-4cc4-aeee-09eab9a756fb</ClientId>
-    <VendorId>com.typepad.thebuildingcoder</VendorId>
-    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+    <VendorId>-*-</VendorId>
+    <VendorDescription>-*-</VendorDescription>
   </AddIn>
 </RevitAddIns>

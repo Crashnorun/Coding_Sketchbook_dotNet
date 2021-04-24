@@ -65,11 +65,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set signtool = %25ProgramFiles(x86)%25\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe
+    <PostBuildEvent>REM set signtool = %25ProgramFiles(x86)%25\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe
 REM "%25ProgramFiles(x86)%25\Windows Kits\10\bin\10.0.18362.0\x64\signtool.exe" sign /f $(ProjectDir)\ClayFormKeyFile.pfx /p PasswordGoesHere /a /v  $(TargetPath) 
 
 REM used to verify if dll as been signed
-REM%25signtool%25 verify $(TargetPath) 
+REM %25signtool%25 verify $(TargetPath) 
 
 copy "$(ProjectDir)*.addin" "$(AppData)\Autodesk\REVIT\Addins\2021"
 copy "$(ProjectDir)bin\debug\*.dll" "$(AppData)\Autodesk\REVIT\Addins\2021"</PostBuildEvent>
