@@ -11,6 +11,14 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 #endregion
 
+/*
+ * TODO: Add progress bar
+ * TODO: Include, gridlines, levels, model lines, linked files
+ * 
+ * CSV format: Element ID, Family Name, Name, Creator, Last Changed, Owner, Family File Path
+ */
+
+
 namespace File_Data_01
 {
     [Transaction(TransactionMode.Manual)]
