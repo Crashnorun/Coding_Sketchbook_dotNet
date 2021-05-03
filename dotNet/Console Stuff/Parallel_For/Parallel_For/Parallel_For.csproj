@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MathClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -50,4 +51,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>echo "Charlie"
+
+if $(Configuration) == Debug ( echo "Post build event for Debug" ) 
+if $(Configuration) == Release ( echo "Post build event for Release"  ) 
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
