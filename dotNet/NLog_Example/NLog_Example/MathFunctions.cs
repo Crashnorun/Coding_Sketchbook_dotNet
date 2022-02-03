@@ -11,7 +11,9 @@ namespace NLog_Example
     public class MathFunctions
     {
 
-        public static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        // public static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        public static NLog.Logger logger = LogHelper.GetLogger();
+        
 
         /// <summary>
         /// Add two numbers together
@@ -21,7 +23,8 @@ namespace NLog_Example
         /// <returns>Result value</returns>
         public static double Add(double Num1, double Num2)
         {
-            Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(), Num1, Num2);
+            //Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(), Num1, Num2);
+            LogHelper.LogMethodInputs(MethodBase.GetCurrentMethod(), Num1, Num2);
 
             if (Num1 == double.NaN)
             {
@@ -52,7 +55,8 @@ namespace NLog_Example
         /// <returns>Result value</returns>
         public static double Subtract(double Num1, double Num2)
         {
-            Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(), Num1, Num2);
+            //Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(), Num1, Num2);
+            LogHelper.LogMethodInputs(MethodBase.GetCurrentMethod(), Num1, Num2);
 
             if (Num1 == double.NaN)
             {
@@ -82,7 +86,8 @@ namespace NLog_Example
         /// <returns></returns>
         public static double Divide(int Num1, int Num2)
         {
-            Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(),  Num1, Num2);
+            // Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(),  Num1, Num2);
+            LogHelper.LogMethodInputs(MethodBase.GetCurrentMethod(), Num1, Num2);
 
             if (Num1 == double.NaN)
             {
@@ -109,10 +114,11 @@ namespace NLog_Example
         }
 
 
-
         public static double Add(List<int> Nums)
         {
-            Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(), Nums);
+            // Program.InvokeMethod(logger, MethodBase.GetCurrentMethod(), Nums);
+            LogHelper.LogMethodInputs( MethodBase.GetCurrentMethod(), Nums);
+            
             int Value = 0;
 
             foreach (int n in Nums)
