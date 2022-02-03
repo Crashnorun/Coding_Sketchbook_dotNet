@@ -12,8 +12,10 @@ using Autodesk.Revit.UI.Selection;
 #endregion
 
 /*
+ * TODO: Add a header to the file with Revit file name, time stamp when data was extracted, summary of all elements
  * TODO: Add progress bar
- * TODO: Include, gridlines, levels, model lines, linked files
+ * TODO: Include, gridlines, levels, model lines, linked files, sheets
+ * TODO: standardize the output list of data. Some of the functions below use different number of columns
  * 
  * CSV format: Element ID, Family Name, Name, Creator, Last Changed, Owner, Family File Path
  */
@@ -82,7 +84,7 @@ namespace File_Data_01
 
             FilteredElementCollector col = new FilteredElementCollector(doc)
                  .OfClass(typeof(FamilySymbol));
-
+            
             foreach (Element e in col)
             {
                 FamilySymbol sym = e as FamilySymbol;
@@ -248,6 +250,7 @@ namespace File_Data_01
         /// <returns>Formatted log file name</returns>
         public string LogFileName(string FileName)
         {
+            //string date = DateTime.Now.ToString("yyMMdd_H:mm:ss");
             string date = DateTime.Now.ToString("yyMMdd");
             return string.Format("{0}_{1}_Element Data Log.csv", date, FileName);
         }
