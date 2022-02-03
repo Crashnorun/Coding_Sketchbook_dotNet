@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace Reflection
@@ -6,7 +8,7 @@ namespace Reflection
     /// <summary>
     /// Person class
     /// </summary>
-    public class Person
+    public class Person : IEquatable<Person>
     {
 
         #region ----PROPERTIES----
@@ -14,17 +16,20 @@ namespace Reflection
         /// <summary>
         /// Private constant string
         /// </summary>
-        private const string PrivateConstantString = "PRIVATE CONSTANT STRING";
+        // private const string PrivateConstantString = "PRIVATE CONSTANT STRING";
 
         /// <summary>
         /// public constant string
         /// </summary>
-        public const string PublicConstantString = "PUBLIC CONSTANT STRING";
+        // public const string PublicConstantString = "PUBLIC CONSTANT STRING";
 
         /// <summary>
         /// Person name
         /// </summary>
-        public string PersonName { get; set; }
+        public string PersonName
+        {
+            get { return string.Format("{0} {1}", FirstName, LastName); }
+        }
 
         /// <summary>
         /// Person age
@@ -41,12 +46,10 @@ namespace Reflection
         /// </summary>
         public string LastName { get; set; }
 
-        [OptionalProperty(Name = "CP")]
+        [DefaultValue(40)]
         public int Age { get; set; }
-        public List<string> ChildrenNames { get; set; }
-        public decimal[] Nums { get; set; }
 
-        [OptionalProperty(true)]
+
         public string MiddleName { get { return "Anthony"; } }
 
         #endregion
@@ -86,7 +89,7 @@ namespace Reflection
 
         public int NameLength()
         {
-            if (string.IsNullOrEmpty(PersonName)) PersonName = FirstName;
+            if (string.IsNullOrEmpty(PersonName)) return -1;
             return PersonName.Length;
         }
 
@@ -99,13 +102,46 @@ namespace Reflection
 
         public override string ToString()
         {
-            List<int> Restraints = new List<int>() { 1, 1, 0, 0, 1, 0 };
-            string restraint = string.Empty;
-            foreach (int i in Restraints) restraint += i.ToString();
+            return string.Format(FirstName + " " + LastName);
+        }
 
-            return string.Format(restraint);
+
+        public bool Equals(Person x, Person y)
+        {
+            if (x == null || y == null) return false;
+            else
+            {
+                return x.FirstName.ToLower() == y.FirstName.ToLower() ? true : false;
+            }
+        }
+
+        public int GetHashCode(Person obj)
+        {
+            return obj.GetHashCode();
+        }
+
+        public bool Equals(Person other)
+        {
+            return Equals(this, other);
         }
 
         #endregion
+    }
+
+    public class PersonComparer : IEqualityComparer<Person>
+    {
+        public bool Equals(Person x, Person y)
+        {
+            if (x == null || y == null) return false;
+            else
+            {
+                return x.FirstName.ToLower() == y.FirstName.ToLower() ? true : false;
+            }
+        }
+
+        public int GetHashCode(Person obj)
+        {
+            return obj.GetHashCode();
+        }
     }
 }

@@ -1,9 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Reflection
@@ -23,13 +28,41 @@ namespace Reflection
 
         static void Main(string[] args)
         {
+            
+            TestReturningGeneric();
+
+            
+            //DeserialiseBinary();
+
+            // Test how to convert 1 and 0 to true and false
+            // BooleanTests();
+
+            // regex testing
+            RegexTesting();
+
             // testing logging entering and exiting a function
             // add two numbers
             Console.WriteLine(Add(1, 2));
 
+            Person P0 = new Person();
+            Console.WriteLine(P0.ToString());
             Person p = new Person("Charlie", 40);
+            Console.WriteLine(p.ToString());
             Person p2 = new Person("Bob", 12);
             Person p3 = new Person(p);
+            Person p4 = new Person("Charlie", 40);
+            Person p5 = new Person(p);
+            List<Person> people = new List<Person> { p, p2, p3, p4, p5 };
+
+            Dictionary<string, string> vals2 = new Dictionary<string, string>();
+            vals2.Add("FirstName", "Charlie");
+            vals2.Add("LastName", "Port");
+            Person p6 = new Person();
+            PopulateAttributes(p6, vals2);
+
+
+            IEnumerable<Person> unique = people.Distinct(new PersonComparer());
+            HashSet<Person> unique2 = new HashSet<Person>(people);
 
             // get all properties and values
             GetAllPropertyNamesAndValues(p);
@@ -63,6 +96,30 @@ namespace Reflection
 
 
             Console.ReadKey();
+        }
+
+        private static T TestReturningGeneric<T>(int i)
+        {
+            if (i == 0) return new object(10);
+            else if (i == 1) return "hello";
+            else return true;
+        }
+
+        public static void PopulateAttributes<T>(T obj, Dictionary<string, string> vals)
+        {
+            PropertyInfo[] props = obj.GetType().GetProperties();
+
+            foreach (PropertyInfo p in props)
+            {
+                var query = from att in vals
+                            where att.Key == p.Name
+                            select att.Value;
+
+                if (query.Count() != 0)
+                {
+                    p.SetValue(obj, query.First());
+                }
+            }
         }
 
 
@@ -131,10 +188,6 @@ namespace Reflection
             }
 
 
-
-            BooleanTests();
-
-
             Console.WriteLine("---------------------------------");
             Console.WriteLine();
         }
@@ -152,6 +205,9 @@ namespace Reflection
         }
 
 
+        /// <summary>
+        /// Test how to convert 1 and 0 to true and false
+        /// </summary>
         public static void BooleanTests()
         {
             Console.WriteLine(string.Format("1 = {0}", Convert.ToBoolean(1)));
@@ -171,5 +227,56 @@ namespace Reflection
         }
 
 
+        public static void DeserialiseBinary()
+        {
+            string filePath = @"C:\Program Files\Computers and Structures\SAP2000 21\AISC.PRO";
+
+            byte[] bytes = File.ReadAllBytes(filePath);
+
+            // stream bytes
+            using (StreamReader sr = new StreamReader(new MemoryStream(bytes)))
+            {
+                // try converting from json
+                // var data =  JsonConvert.DeserializeObject(sr.ReadToEnd());
+            }
+
+            //--------------------------------
+
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                IFormatter br = new BinaryFormatter();
+                ms.Position = 0;
+                var data = br.Deserialize(ms);
+            }
+
+
+            //   var str = System.Text.Encoding.Default.GetString(result);
+
+
+            //--------------------------------
+
+            BinaryFormatter f = new BinaryFormatter();
+            using (FileStream str = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                IFormatter br = new BinaryFormatter();
+                var data = br.Deserialize(str);
+
+                /*var data = f.Deserialize(str);
+                str.Position = 0;*/
+
+                StreamReader reader = new StreamReader(str);
+                var result = reader.ReadToEnd();
+            }
+        }
+
+
+        // used for regex testing
+        public static void RegexTesting()
+        {
+            string value = " something_ is he-re ";
+            Console.WriteLine(Regex.Replace(value, @"[^0-9a-zA-Z]+", ""));
+        }
+
     }
 }
+
