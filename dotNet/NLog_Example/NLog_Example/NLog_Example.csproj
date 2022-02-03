@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogHelper.cs" />
     <Compile Include="MathFunctions.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />

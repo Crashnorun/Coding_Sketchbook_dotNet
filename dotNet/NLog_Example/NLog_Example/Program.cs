@@ -11,10 +11,17 @@ namespace NLog_Example
     public class Program
     {
 
-        public static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        // create logger locally
+        // public static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        
+        // create logger globally
+        public static NLog.Logger logger = LogHelper.InitializeLogger();
+
+
 
         static void Main(string[] args)
         {
+            // find Nlog config file
             string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string logConfigFile = "NLog.config";
             string filePath = folderPath + @"\" + logConfigFile;
@@ -71,10 +78,11 @@ namespace NLog_Example
 
             Person bob = new Person("bob", 34);
             CallingPerson(bob);
+            
 
             TestMultipleLogFiles();
 
-
+            Console.WriteLine("---- DONE ----");
             Console.ReadKey();
         }
 
@@ -121,7 +129,8 @@ namespace NLog_Example
 
         public static void CallingPerson(Person person)
         {
-            InvokeMethod(logger, MethodBase.GetCurrentMethod(), person);
+            //InvokeMethod(logger, MethodBase.GetCurrentMethod(), person);
+            LogHelper.LogMethodInputs(MethodBase.GetCurrentMethod(), person);
         }
 
 
