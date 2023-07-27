@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhinoCommonTests2", "RhinoCommonTests2\RhinoCommonTests2.csproj", "{6BCEB630-A161-44CA-A000-DAB32329040F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BCEB630-A161-44CA-A000-DAB32329040F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BCEB630-A161-44CA-A000-DAB32329040F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BCEB630-A161-44CA-A000-DAB32329040F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BCEB630-A161-44CA-A000-DAB32329040F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54D8424C-7F15-418B-AABF-E9FF4F2DB65A}
+	EndGlobalSection
+EndGlobal
