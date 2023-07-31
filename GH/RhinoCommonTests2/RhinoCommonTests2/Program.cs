@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Eto.Forms;
 using Rhino;
 using Rhino.Geometry;
 
@@ -40,6 +39,14 @@ namespace RhinoCommonTests2
             Point3d pt = new Point3d(12, 34, 56);
             Console.WriteLine(pt);
 
+
+            Sphere s = new Sphere(Point3d.Origin, 12);
+            Brep b = s.ToBrep();
+            MeshingParameters mp = new MeshingParameters(0.5);
+            Mesh[] m = Mesh.CreateFromBrep(b, mp);
+            Console.WriteLine(m[0].Vertices.Count);
+
+           // Brep rep = new Brep();
 
 
             Console.WriteLine("---- DONE ----");
