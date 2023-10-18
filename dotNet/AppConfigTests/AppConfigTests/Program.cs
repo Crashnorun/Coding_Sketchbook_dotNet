@@ -4,6 +4,10 @@ using System.Configuration;
 
 Console.WriteLine("Hello, World!");
 
+#region ---- READING VALUES ----
+
+Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+
 
 // get the named section from the config file
 NameValueCollection? section = ConfigurationManager.GetSection("categories") as NameValueCollection;
@@ -33,6 +37,26 @@ string[] vals = Array.ConvertAll(values[0].Split(','), s => s.Trim());
 
 foreach (string val in vals)
     Console.WriteLine("\t" + val);
+#endregion
+
+#region ---- WRITING NEW VALUES ----
+
+string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+Configuration config = ConfigurationManager.OpenExeConfiguration(Path.GetDirectoryName(path)+ @"\AppConfigTests.dll");
+config.AppSettings.Settings.Add("New Date", DateTime.Now.ToString());
+config.Save(ConfigurationSaveMode.Minimal);
+
+//ConfigurationSectionGroup group = new ConfigurationSectionGroup
+//{
+//    SectionGroupName = "Group Name"
+//};
+
+
+//config.SectionGroups.Add("Adding Section Group",)
+
+#endregion
+
+
 
 Console.ReadKey();
 
