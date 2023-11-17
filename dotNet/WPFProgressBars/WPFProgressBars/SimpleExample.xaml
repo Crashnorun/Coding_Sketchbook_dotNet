@@ -1,0 +1,20 @@
+﻿<Window x:Class="WPFProgressBars.SimpleExample"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFProgressBars"
+        mc:Ignorable="d"
+        Title="SimpleExample" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="lbl1" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="pbar1" Height="10" Margin="10,40,10,0" VerticalAlignment="Top"/>
+        
+        <Label x:Name="lbl2" Content="Label" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <ProgressBar x:Name="pbar2" Height="10" Margin="10,100,10,0" VerticalAlignment="Top"/>
+        
+        <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="140" Click="btnStart_Click"/>
+
+
+    </Grid>
+</Window>
