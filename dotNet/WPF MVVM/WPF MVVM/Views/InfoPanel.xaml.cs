@@ -39,15 +39,6 @@ namespace WPF_MVVM.Views
             pbar.ToolTip = ttPbar;
 
         }
-
-        public void Count(int max)
-        {
-            // counterVM.Count(max);
-        }
-
-        private void btnCount_Click(object sender, RoutedEventArgs e)
-        {
-            //  counterVM.Count((int)this.pbar.Maximum);
-        }
+ 
     }
 }

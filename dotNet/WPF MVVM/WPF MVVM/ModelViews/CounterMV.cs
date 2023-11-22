@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_MVVM.Commands;
 using WPF_MVVM.Models;
 
 namespace WPF_MVVM.ModelViews
@@ -12,27 +13,38 @@ namespace WPF_MVVM.ModelViews
     {
         #region ---- PROPERTIES ----
 
-        //public string WindowTitle
-        //{
-        //    get { return _windowTitle; }
-        //    set { _windowTitle = value; OnPropertyChanged("WindowTitle"); }
-        //}
-        //private string _windowTitle;
-
-
-        //public int CounterValue
-        //{
-        //    get { return _counterValue; }
-        //    set { _counterValue = value; OnPropertyChanged("CounterValue"); }
-        //}
-        //private int _counterValue;
-
-        private CounterClass counter;
+         private CounterClass counter;
         public CounterClass Counter
         {
             get { return counter; }
             set { counter = value; OnPropertyChanged("Counter"); }
         }
+
+        private int maxNum;
+
+        public int MaxNum
+        {
+            get { return maxNum; }
+            set { maxNum = value; OnPropertyChanged("MaxNum"); }
+        }
+
+        #endregion
+
+
+        #region ---- COMMANDS ----
+
+        private RelayCommand startCountingCommand;
+
+        public RelayCommand StartCountingCommand
+        {
+            get { return startCountingCommand; }
+        }
+
+        public void Count()
+        {
+            Counter.Count(MaxNum);
+        }
+
         #endregion
 
 
@@ -41,8 +53,8 @@ namespace WPF_MVVM.ModelViews
         public CounterMV()
         {
             Counter = new CounterClass();
-            //WindowTitle = Counter.WindowTitle;
-            //CounterValue = Counter.CounterValue;
+            MaxNum = 100;
+            startCountingCommand = new RelayCommand(Count);
         }
 
         #endregion
@@ -50,10 +62,7 @@ namespace WPF_MVVM.ModelViews
 
         #region ---- METHODS ----
 
-        public void Count(int MaxNum)
-        {
-            Counter.Count(MaxNum);
-        }
+       
 
         #endregion
 

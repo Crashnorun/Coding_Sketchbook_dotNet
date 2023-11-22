@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:WPF_MVVM.ModelViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    
+
+
     <UserControl.Resources>
         <SolidColorBrush x:Key="ProgressBar.Progress" Color="#FF008FEA"/>
         <SolidColorBrush x:Key="ProgressBar.Background" Color="#FFE6E6E6"/>
@@ -47,12 +47,12 @@
 
         <ProgressBar Style="{DynamicResource ProgressBarStyle1}" x:Name="pbar" 
                      Height="10" Margin="35,120,35,0" VerticalAlignment="Top" 
-                     Foreground="#FF0BC1E4" BorderBrush="{x:Null}" ToolTip="Counter progress" UseLayoutRounding="True"/>
+                     Foreground="#FF0BC1E4" BorderBrush="{x:Null}" ToolTip="Counter progress" UseLayoutRounding="True"
+                     Value="{Binding Path=Counter.CurrentValue}"/>
 
         <Button x:Name="btnCount" 
                 Margin="0,0,35,28" HorizontalAlignment="Right" Width="103" Height="20" VerticalAlignment="Bottom" 
-                Content="Start Counting" 
-                Click="btnCount_Click"/>
+                Content="Start Counting" Command="{Binding Path=StartCountingCommand}"/>
 
     </Grid>
 </UserControl>
