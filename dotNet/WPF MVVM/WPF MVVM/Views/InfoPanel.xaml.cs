@@ -26,11 +26,11 @@ namespace WPF_MVVM.Views
         {
             InitializeComponent();
 
-            //this.txtTitle.Text = "Template Title";
+            //this.txtTitle.Text = "Temp Title Text";
             ToolTip ttTitle = new ToolTip() { Content = "Example Tooltip" };
             txtTitle.ToolTip = ttTitle;
 
-           // this.lblCount.Content = "0";
+            //this.lblCount.Content = "0";
 
             this.pbar.Minimum = 0;
             this.pbar.Maximum = 100;
@@ -42,12 +42,12 @@ namespace WPF_MVVM.Views
 
         public void Count(int max)
         {
-           // counterVM.Count(max);
+            // counterVM.Count(max);
         }
 
         private void btnCount_Click(object sender, RoutedEventArgs e)
         {
-          //  counterVM.Count((int)this.pbar.Maximum);
+            //  counterVM.Count((int)this.pbar.Maximum);
         }
     }
 }

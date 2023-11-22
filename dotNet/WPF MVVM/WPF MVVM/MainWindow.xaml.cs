@@ -33,7 +33,7 @@ namespace WPF_MVVM
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //  infoPanel.Count(100);
+           
         }
     }
 }
