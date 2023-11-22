@@ -29,6 +29,7 @@ namespace MVVM_Demo_2
         public MainWindow()
         {
             InitializeComponent();
+
             employeeVM = new EmployeeVM();
             this.DataContext = employeeVM;
         }

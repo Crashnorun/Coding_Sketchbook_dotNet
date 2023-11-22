@@ -10,6 +10,9 @@
 
 
     <Grid>
+        
         <vw:EmployeeView></vw:EmployeeView>
+        
     </Grid>
+    
 </Window>

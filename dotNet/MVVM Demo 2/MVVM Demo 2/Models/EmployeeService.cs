@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace MVVM_Demo_2.Models
     {
         #region ---- PROPERTIES ----
 
-        private static List<Employee> _employees = new List<Employee>();
+        private static ObservableCollection<Employee> _employees = new ObservableCollection<Employee>();
 
         #endregion
 
@@ -19,7 +20,7 @@ namespace MVVM_Demo_2.Models
 
         public EmployeeService()
         {
-            _employees = new List<Employee>();
+            _employees = new ObservableCollection<Employee>();
             _employees.Add(new Employee() { Id = 1, Name = "John", Age = 25 });
             _employees.Add(new Employee() { Id = 2, Name = "Mary", Age = 35 });
             _employees.Add(new Employee() { Id = 3, Name = "Mike", Age = 45 });
@@ -32,7 +33,7 @@ namespace MVVM_Demo_2.Models
 
         #region ---- METHODS ----
 
-        public List<Employee> GetAllEmployees()
+        public ObservableCollection<Employee> GetAllEmployees()
         {
             return _employees;
         }
@@ -44,7 +45,16 @@ namespace MVVM_Demo_2.Models
                 if (employee.Age < 21 || employee.Age > 60)
                     throw new Exception("Employee age must be between 21 and 60");
 
-                _employees.Add(employee);
+                // created a temp employee object to add to the collection
+                // if I use the employee object directly, it will be a reference
+                // and any changes made to the employee object will be reflected in the UI  
+                Employee tempEmployee = new Employee()
+                {
+                    Name = employee.Name,
+                    Age = employee.Age,
+                    Id = employee.Id
+                };
+                _employees.Add(tempEmployee);
                 return true;
             }
             catch (Exception) { return false; }

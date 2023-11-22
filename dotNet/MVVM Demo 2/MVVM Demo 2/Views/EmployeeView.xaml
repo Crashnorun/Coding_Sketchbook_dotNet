@@ -36,20 +36,20 @@
 
         <TextBox Name="txtId" Grid.Row="1" Grid.Column="1" 
                  Margin="5,8,5,8" Padding="3,3,3,3" BorderThickness="0,0,0,1"
-                 Text="{Binding Path=Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Path=CurrentEmployee.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBox Name="txtName" Grid.Row="2" Grid.Column="1" 
                  Margin="5,8,5,8" Padding="3,3,3,3" BorderThickness="0,0,0,1"
-                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding Path=CurrentEmployee.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBox Name="txtAge" Grid.Row="3" Grid.Column="1" 
                  Margin="5,8,5,8" Padding="3,3,3,3" BorderThickness="0,0,0,1"
-                 Text="{Binding Path=Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Path=CurrentEmployee.Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
             <Button Name="btnAdd" Content="Add" Width="100" Margin="5,8,5,8" 
-                    Command="{Binding Path=AddCommand}" Padding="3,3,3,3" BorderBrush="{x:Null}"/>
+                    Command="{Binding Path=SaveCommand}" Padding="3,3,3,3" BorderBrush="{x:Null}"/>
             <Button Name="btnUpdate" Content="Update" Width="100" Margin="5,8,5,8" 
                     Command="{Binding Path=UpdateCommand}" Padding="3,3,3,3" BorderBrush="{x:Null}"/>
             <Button Name="btnDelete" Content="Delete" Width="100" Margin="5,8,5,8" 
@@ -59,7 +59,7 @@
         </StackPanel>
 
         <TextBlock Name="txtMessage" Grid.Row="5" Grid.Column="1" 
-               Text="Employee Details" FontSize="20" FontWeight="Bold"/>
+               Text="{Binding Path=Message}" FontSize="20" FontWeight="Bold"/>
 
         <DataGrid Name="dgEmployees" Grid.Row="6" Grid.Column="1"
                   AutoGenerateColumns="False" Margin="5,8,5,8" Padding="3,3,3,3"
