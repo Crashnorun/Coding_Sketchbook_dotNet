@@ -67,16 +67,19 @@ namespace WPF_MVVM.Models
         #endregion
 
 
-        public void Count(int max)
+        public async Task Count(int max)
         {
-            CounterValue = max;
-            for (int i = 0; i < max; i++)
+            await Task.Run(() =>
             {
-                CurrentValue = i;
-                WindowTitle = "Crashnorun " + i;
-                Debug.WriteLine(CurrentValue);
-                Thread.Sleep(250);
-            }
+                CounterValue = max;
+                for (int i = 0; i < max; i++)
+                {
+                    CurrentValue = i;
+                    WindowTitle = "Crashnorun " + i;
+                    Debug.WriteLine(CurrentValue);
+                    Thread.Sleep(10);
+                }
+            });
         }
     }
 }
